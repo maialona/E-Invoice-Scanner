@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode';
 import { X } from 'lucide-react';
 
 interface ScannerProps {
@@ -15,9 +15,11 @@ export const Scanner = ({ onScanSuccess, onClose }: ScannerProps) => {
   useEffect(() => {
     // Config for the scanner
     const config = {
-      fps: 10,
+      fps: 25, // Increased from 10 to 25 for faster feedback
       qrbox: { width: 250, height: 250 },
       aspectRatio: 1.0,
+      disableFlip: false, // Helps with front/back camera confusion
+      formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
     };
 
     // Create instance
